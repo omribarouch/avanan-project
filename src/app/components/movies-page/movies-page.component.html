@@ -1,0 +1,55 @@
+<div *ngIf="isLoading; else page">
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only"></span>
+    </div>
+    <p class="ml-2">Loading...</p>
+  </div>
+</div>
+
+<ng-template #page>
+  <div class="container mt-3">
+    <div class="row">
+      <div *ngFor="let movie of movies" class="col-md-6">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+
+            <p class="card-text">Release Date: {{ movie.release_date }}</p>
+
+            <p class="card-text">Opening Crawl: {{ movie.opening_crawl }}</p>
+
+            <p class="card-text">Director: {{ movie.director }}</p>
+
+            <p class="card-text">Producer: {{ movie.producer }}</p>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+              View Characters
+            </button>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Characters</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <ul class="list-group">
+                      <li *ngFor="let character of movie.characters" class="list-group-item">
+                        {{ character.name }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
